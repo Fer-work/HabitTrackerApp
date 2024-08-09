@@ -1,27 +1,91 @@
 <header
-  class="row d-flex flex-row justify-content-between bg-light mx-auto py-2 mb-3"
+  class="d-flex flex-row justify-content-evenly bg-light mx-auto py-2 mb-3"
 >
-  <div class="col-md-3 d-flex align-items-center justify-content-center my-2">
+  <!-- Title Section -->
+  <div class="col-lg-6 d-flex align-items-start my-2">
     <h1 class="mb-0">
-      <a
-        href="/"
-        class="text-light text-decoration-none bg-indigo-500 p-1 rounded"
-        >BookFace</a
+      <a href="/" class="text-light text-decoration-none bg-primary p-1 rounded"
+        >Habit Tracker</a
       >
     </h1>
   </div>
 
-  <div
-    class="col-md-4 d-flex align-items-center justify-content-center my-2"
-    aria-label="Navigation Buttons"
-  >
+  <!-- Dropdown menu for medium screens and below -->
+  <div class="d-lg-none">
+    <a
+      class="btn btn-primary"
+      data-bs-toggle="collapse"
+      href="#multiCollapseExample1"
+      role="button"
+      aria-expanded="false"
+      aria-controls="multiCollapseExample1"
+    >
+      <span><i class="bi bi-list primary"></i></span>
+    </a>
+
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+      <div class="d-flex flex-column my-2">
+        <a href="/" class="btn btn-primary text-decoration-none text-light mb-2"
+          >Home</a
+        >
+        <a
+          href="/habits"
+          class="btn btn-primary text-decoration-none text-light mb-2"
+          >Habits</a
+        >
+        <a
+          href="/break"
+          class="btn btn-primary text-decoration-none text-light mb-2"
+          >Break</a
+        >
+        <a
+          href="/finances"
+          class="btn btn-primary text-decoration-none text-light mb-2"
+          >Finances</a
+        >
+        <a
+          href="/schedule"
+          class="btn btn-primary text-decoration-none text-light mb-2"
+          >Schedule</a
+        >
+        <a
+          href="/activities"
+          class="btn btn-primary text-decoration-none text-light mb-2"
+          >Activities</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- Horizontal navigation buttons for large screens and above -->
+  <div class="d-lg-flex align-items-center justify-content-center my-2">
     <a href="/" class="btn btn-primary text-decoration-none text-light mx-2"
       >Home</a
     >
     <a
-      href="/login"
+      href="/habits"
       class="btn btn-primary text-decoration-none text-light mx-2"
-      >Log in</a
+      >Habits</a
+    >
+    <a
+      href="/break"
+      class="btn btn-primary text-decoration-none text-light mx-2"
+      >Break</a
+    >
+    <a
+      href="/finances"
+      class="btn btn-primary text-decoration-none text-light mx-2"
+      >Finances</a
+    >
+    <a
+      href="/schedule"
+      class="btn btn-primary text-decoration-none text-light mx-2"
+      >Schedule</a
+    >
+    <a
+      href="/activities"
+      class="btn btn-primary text-decoration-none text-light mx-2"
+      >Activities</a
     >
   </div>
 </header>
