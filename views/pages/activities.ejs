@@ -30,102 +30,95 @@
       </button>
     </div>
     <div class="card-body d-flex flex-row no-wrap">
+      <% if (organizedActivities && Object.keys(organizedActivities).length > 0)
+      { %> <% ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
+      'Saturday'].forEach(dayOfWeek => { %>
       <div class="card mx-2 flex-fill">
         <div class="card-body">
-          <h5 class="card-title">Monday</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Date</h6>
-          <p class="card-text">Activity 1 <span>time</span></p>
-          <p class="card-text">Activity 2</p>
-          <p class="card-text">Activity 3</p>
-          <p class="card-text">Activity 4</p>
+          <h5 class="card-title"><%= dayOfWeek %></h5>
+          <% if (organizedActivities[dayOfWeek]) { %>
+          <h6 class="card-subtitle mb-2 text-body-secondary">
+            <% const firstActivity = organizedActivities[dayOfWeek][0]; %> <%=
+            new Date(firstActivity.date).toLocaleDateString() %>
+          </h6>
+          <% organizedActivities[dayOfWeek].forEach(activity => { %>
+          <p class="card-text">
+            <%= activity.description %>
+            <span><%= activity.startTime %> - <%= activity.endTime %></span>
+          </p>
+          <% }) %> <% } else { %>
+          <h6 class="card-subtitle mb-2 text-body-secondary">
+            No activities for this day
+          </h6>
+          <% } %>
         </div>
       </div>
-      <div class="card mx-2 flex-fill">
-        <div class="card-body">
-          <h5 class="card-title">Tuesday</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Date</h6>
-          <p class="card-text">Activity 1</p>
-          <p class="card-text">Activity 2</p>
-          <p class="card-text">Activity 3</p>
-          <p class="card-text">Activity 4</p>
-        </div>
-      </div>
-      <div class="card mx-2 flex-fill">
-        <div class="card-body">
-          <h5 class="card-title">Wednesday</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Date</h6>
-          <p class="card-text">Activity 1</p>
-          <p class="card-text">Activity 2</p>
-          <p class="card-text">Activity 3</p>
-          <p class="card-text">Activity 4</p>
-        </div>
-      </div>
-      <div class="card mx-2 flex-fill">
-        <div class="card-body">
-          <h5 class="card-title">Thursday</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Date</h6>
-          <p class="card-text">Activity 1</p>
-          <p class="card-text">Activity 2</p>
-          <p class="card-text">Activity 3</p>
-          <p class="card-text">Activity 4</p>
-        </div>
-      </div>
-      <div class="card mx-2 flex-fill">
-        <div class="card-body">
-          <h5 class="card-title">Friday</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Date</h6>
-          <p class="card-text">Activity 1</p>
-          <p class="card-text">Activity 2</p>
-          <p class="card-text">Activity 3</p>
-          <p class="card-text">Activity 4</p>
-        </div>
-      </div>
-      <div class="card mx-2 flex-fill">
-        <div class="card-body">
-          <h5 class="card-title">Saturday</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Date</h6>
-          <p class="card-text">Activity 1</p>
-          <p class="card-text">Activity 2</p>
-          <p class="card-text">Activity 3</p>
-          <p class="card-text">Activity 4</p>
-        </div>
-      </div>
-      <div class="card mx-2 flex-fill">
-        <div class="card-body">
-          <h5 class="card-title">Sunday</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Date</h6>
-          <p class="card-text">Activity 1</p>
-          <p class="card-text">Activity 2</p>
-          <p class="card-text">Activity 3</p>
-          <p class="card-text">Activity 4</p>
-        </div>
-      </div>
+      <% }) %> <% } else { %>
+      <p>No activities available for this week.</p>
+      <% } %>
     </div>
   </div>
 
-  <div class="card w-75 border mx-auto my-4 p-4">
-    <form action="/activities" method="post">
-      <div class="mb-3 row row">
-        <label for="firstName" class="form-label col-sm-4">
-          Add Activity
-        </label>
-        <div class="col-sm-8">
-          <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            class="form-control"
-          />
-        </div>
+  //
+  <div class="card w-75 border mx-auto my-2 p-4">
+    <form action="/activities" method="POST">
+      <div class="mb-3">
+        <label for="description" class="form-label">Activity Description</label>
+        <textarea
+          class="form-control"
+          id="description"
+          name="description"
+          rows="3"
+          required
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="date" class="form-label">Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="date"
+          name="date"
+          default="today"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="startTime" class="form-label">Start Time</label>
+        <input
+          type="time"
+          class="form-control"
+          id="startTime"
+          name="startTime"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="endTime" class="form-label">End Time</label>
+        <input type="time" class="form-control" id="endTime" name="endTime" />
       </div>
 
       <div class="mx-auto container d-flex justify-content-center my-4">
-        <input type="submit" value="Submit" class="btn btn-primary mx-2" />
+        <input
+          type="submit"
+          value="Log Activity"
+          class="btn btn-primary mx-2"
+        />
         <input type="reset" value="clear" class="btn btn-danger mx-2" />
       </div>
     </form>
 
     <%- include('../shared/footer') %>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+        document.getElementById("date").value = today; // Set the date input's value to today
+      });
+    </script>
   </div>
 
   <%- include('../shared/scripts') %>

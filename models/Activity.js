@@ -5,6 +5,18 @@ const activitySchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
+      trim: true,
+    },
+    date: {
+      type: Date,
+      required: true,
+    },
+    startTime: {
+      type: String,
+      required: true,
+    },
+    endTime: {
+      type: String,
     },
   },
   {
