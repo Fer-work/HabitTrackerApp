@@ -11,9 +11,14 @@ const {
   postActivity,
 } = require("../controllers/index");
 
+// Import middleware
+const { activityValidator } = require("../middleware/activityValidator");
+
 // Set up routes
 router.get("/", getHome);
-router.get("/activities", getActivitiesHome).post("/activities", postActivity);
+router
+  .get("/activities", getActivitiesHome)
+  .post("/activities", activityValidator, postActivity);
 router.get("/finances", getFinancesHome);
 router.get("/habits", getHabitsHome);
 router.get("/schedule", getScheduleHome);
